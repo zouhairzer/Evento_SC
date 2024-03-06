@@ -54,18 +54,15 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="/login">Sign In</a></li>
-                                        <li><a href="/register">Sign up</a></li>
-                                        <li><a href="schedule.html">Schedule</a></li>
-                                        <li><a href="blog.html">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
-                                            </ul>
+                                        <li><a style="color:blue; " href="index.html">Home</a></li>
+                                        <li><a style="color:blue; " href="/login">Sign In</a></li>
+                                        <li><a style="color:blue; " href="/register">Sign up</a></li>
+                                        <li>
+                                            <form action="/logout" method="get">
+                                                @csrf
+                                                <button type="submit" style="border:none; background:white; color:blue; cursor: pointer;">logout</button>
+                                            </form>
                                         </li>
-                                        <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>

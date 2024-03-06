@@ -30,6 +30,11 @@
               <form action="/login" method="post">
                 @csrf
                 <!-- Email input -->
+                @if(session('Eror'))
+                    <div class="alert alert-danger">
+                        {{ session('Eror') }}
+                    </div>
+                @endif
                 <div class="form-outline mb-4 ">
                     <label class="form-label" for="form3Example3">Email address</label>
                     <input type="email" name="email" id="form3Example3" class="form-control" />
@@ -41,23 +46,17 @@
                     <input type="password" name="password" id="form3Example4" class="form-control" />
                 </div>
 
-                <!-- Checkbox -->
+                <!-- Register buttons -->
                 <div class="form-check d-flex justify-content-center mb-4">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                  <label class="form-check-label" for="form2Example33">
-                    Subscribe to our Web Site
-                  </label>
+                  <a href="/forgot_Password" class="form-check-label" >
+                    Forgot Password
+                  </a>
                 </div>
 
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block mb-4">
                   Sign up
                 </button>
-
-                <!-- Register buttons -->
-                <div class="text-center">
-                  <p>or <a href="/register">sign In</a></p>
-                  
 
 </body>
 </html>

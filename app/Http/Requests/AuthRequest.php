@@ -24,7 +24,8 @@ class AuthRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'role_id' => 'required'
         ];
     }
 }

@@ -31,9 +31,20 @@
                 @csrf
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row">
+                @if(session('Error'))
+                    <div class="alert alert-danger">
+                        {{ session('Error') }}
+                    </div>
+                @endif
+                
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                     <div class="form-outline">
-                    <label class="form-label" for="form3Example1">Name</label>
-                      <input type="text" name="name" id="form3Example1" class="form-control" />
+                      <label class="form-label" for="form3Example1">Name</label>
+                        <input type="text" name="name" id="form3Example1" class="form-control" />
                     </div>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
@@ -47,13 +58,16 @@
                     <input type="password" name="password" id="form3Example4" class="form-control" />
                 </div>
 
-                <!-- Checkbox -->
-                <div class="form-check d-flex justify-content-center mb-4">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                  <label class="form-check-label" for="form2Example33">
-                    Subscribe to our Web Site
-                  </label>
+                <!-- Select -->
+                <label for="subscriptionSelect">Chose : </label>
+                <div class="form-group d-flex justify-content-center mb-4">
+                  <select class="form-select" name="role_id" id="subscriptionSelect">
+                    @foreach($roles as $role)
+                    <option value="{{ $role->id }}"  selected>{{ $role->role }}</option>
+                    @endforeach
+                  </select>
                 </div>
+
 
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block mb-4">
@@ -63,6 +77,11 @@
                 <!-- Register buttons -->
                 <div class="text-center">
                   <p>or <a href="/login">sign In</a></p>
-
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

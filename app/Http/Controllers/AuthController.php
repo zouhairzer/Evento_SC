@@ -2,48 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\crR;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\forgotPasswordMail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Firebase\JWT\JWT;
 use Firebase\JWT\key;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\crR;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
     {
         
         $user = User::where('email', $request->email)->first();
         // dd($request);
         if($user){
-            return redirect()->back()->with("The Account Already Exist");
+            return redirect()->back()->with('Error','The Account Already Exist');
         }else{
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = $request->password;
+            $user->role_id = $request->role_id;
             
             $user->save();
 
-            return view('/login');
+            return view('/login')->with('success', 'Registration Successful');
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+
     public function login(Request $request)
     {
         $user = User::where('email',$request->email)->first();
@@ -60,39 +54,60 @@ class AuthController extends Controller
             $cookie = cookie('token', $jwt, 60);
             return redirect('/')->withCookie($cookie);
         }else{
-            return redirect()->back()->with("invalid information");
+            return redirect()->back()->with('Eror','invalid Information');
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(crR $crR)
+
+    
+    public function forgot_Password(Request $request)
     {
-        //
+        $user = User::where('email', $request->email)->first();
+
+        if(!empty($user)){
+            $user->remember_token = str::random(49); 
+            $user->save();
+
+            // dd($user);
+
+            Mail::to($user->email)->send(new forgotPasswordMail($user));
+            // dd($user);
+
+            return redirect()->back()->with('success', 'Check Your Email');
+        }
+        else{
+            return redirect()->back()->with('Error','Email Not found');
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(crR $crR)
+
+    public function resetPassword($token, Request $request)
     {
-        //
+        // dd($request);
+        $user = User::where('remember_token', '=', $token)->first();
+
+        if(!empty($user)){
+            
+            if($request->password == $request->cpassword){
+                $user->password = Hash::make($request->cpassword);
+                $user->remember_token = str::random(49);
+                $user->save();
+
+                return redirect('/login')->with('success','Password Successfully Reset');
+            }
+            else{
+                return redirect()->back()->with('Error','Pssword and Confirm Password Incorrect');
+            }
+        }
+        else{
+            abort(404);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, crR $crR)
+    public function logout()
     {
-        //
+        Session::flush();
+        return view('login');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(crR $crR)
-    {
-        //
-    }
 }

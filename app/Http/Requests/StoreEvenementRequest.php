@@ -22,7 +22,12 @@ class StoreEvenementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'titre',
+            'description',
+            'image',
+            'date',
+            'lieu',
+            'nombre_places_disponibles'
         ];
     }
 }

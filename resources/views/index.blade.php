@@ -54,7 +54,7 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a style="color:blue; " href="index.html">Home</a></li>
+                                        <li><a style="color:blue; " href="/">Home</a></li>
                                         <li><a style="color:blue; " href="/login">Sign In</a></li>
                                         <li><a style="color:blue; " href="/register">Sign up</a></li>
                                         <li>

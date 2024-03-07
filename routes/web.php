@@ -5,6 +5,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EvenementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +37,9 @@ Route::get('/dashboard',[EventoController::class,'afficheDashboard']);
 
 Route::get('/table',[EventoController::class,'afficheTable']);
 
+Route::get('/orDashboard',[EventoController::class,'afficheorDashboard']);
+
+Route::get('/orTables',[EventoController::class,'afficheorTables']);
 
 ////////////////////////// AUTHENTIFICATION && RESET PASSWORD //////////////////////////
 
@@ -55,6 +59,34 @@ Route::get('/register',[RoleController::class,'getRoles']);
 
 Route::post('/AjouterCategory',[CategoryController::class,'AjouterCategory']);
 
-Route::get('/table',[CategoryController::class,'getCategory']);
+Route::get('/table',[CategoryController::class,'AfficheCategory']);
 
 Route::get('/deleteCategory/{id}',[CategoryController::class,'deleteCategory']);
+
+Route::get('/update_category/{id}',[CategoryController::class,'getCategory']);
+
+Route::post('/update/category',[CategoryController::class,'updateCategory']);
+
+//////////////////////////////////////// Evenement  ////////////////////////////////////////
+
+Route::post('/orTables',[EvenementController::class,'AjouterEvenement']);
+
+Route::get('/orTables',[EvenementController::class,'AfficheEvenement']);
+
+Route::get('/deleteEvenement/{id}',[EvenementController::class,'deleteEvenements']);
+
+Route::get('/update_Evenement/{id}',[EvenementController::class,'getEvenements']);
+
+Route::post('/update/Evenement',[EvenementController::class,'updateEvenements']);
+
+//////////////////////////////////////// users  ////////////////////////////////////////
+
+Route::get('/users',[AuthController::class,'afficheUsers']);
+
+Route::post('/users',[AuthController::class,'ajouterUser']);
+
+Route::get('/deleteUser/{id}',[AuthController::class,'deleteUser']);
+
+Route::get('/update_user/{id}',[AuthController::class,'getUser']);
+
+Route::post('/update/user',[AuthController::class,'updateUser']);

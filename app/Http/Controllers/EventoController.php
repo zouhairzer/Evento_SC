@@ -48,11 +48,21 @@ class EventoController extends Controller
 
     public function afficheDashboard()
     {
-        return view('organisateur.dashboard');
+        return view('admin.dashboard');
     }
     
     public function afficheTable()
     {
-        return view('organisateur.table');
+        return view('admin.table');
+    }
+
+    public function afficheorDashboard()
+    {
+        return view('organisateur.orDashboard');
+    }
+
+    public function afficheorTables()
+    {
+        return view('organisateur.orTables');
     }
 }

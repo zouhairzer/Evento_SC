@@ -27,10 +27,10 @@ class CategoryController extends Controller
         }
     }
 
-    public function getCategory()
+    public function AfficheCategory()
     {
-        $category = Category::paginate(2);
-        return view('organisateur.table', compact('category'));
+        $category = Category::paginate(5);
+        return view('admin.table', compact('category'));
     }
 
     public function deleteCategory($id)
@@ -38,6 +38,22 @@ class CategoryController extends Controller
        
         $delete = Category::find($id);
         $delete->delete();
+        return redirect()->back();
     }
  
+    public function getCategory($id)
+    {
+        $category = Category::find($id);
+        return view('admin.update_category',compact('category'));
+    }
+
+    public function updateCategory(Request $request)
+    {
+        $category = Category::findOrFail($request->id);
+        $category->category = $request->category;
+        $category->update();
+        // dd($category); 
+        return redirect('/table')->with('succes','Update Success'); 
+    }
+
 }

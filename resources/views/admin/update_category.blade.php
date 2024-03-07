@@ -272,7 +272,7 @@
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">New message</span> from Laur
+                          <span class="font-weight-bold">Update Category</span> from Laur
                         </h6>
                         <p class="text-xs text-secondary mb-0">
                           <i class="fa fa-clock me-1"></i>
@@ -337,91 +337,31 @@
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container-fluid py-4 mx-5">
-      <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-                @if(session('Error'))
-                   <div class="alert alert-danger">
-                       {{session('Error')}}
-                   </div>
-                @endif
 
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{session('success')}}
-                    </div>
-                @endif
-            <div class="card-header pb-5 text-center">
-              <h4>Ctegories</h4>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
-                <div class="col-6 text-start mx-4">
-                    <button class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Ajouter</button>
-                </div>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form action="/AjouterCategory" method="post">
-                            @csrf
-                          <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                            <input type="text" name="category" class="form-control" id="recipient-name">
-                          </div>    
-                            <button type="submit" class="btn btn-primary">Ajouter</button>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($category as $categories)
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{ $categories->category }}</h6>
-                            <p class="text-xs text-secondary mb-0"></p>
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="/update/category" method="POST">
+                                @csrf
+
+                                <input type="hidden" name="id" value="{{ $category->id }}">
+                                <div class="mb-3">
+                                    <label for="category" class="col-form-label">Category</label>
+                                    <input type="text" class="form-control" name="category" id="category" value="{{ $category->category }}">
+                                </div>
+                                
+                                    <button type="submit" class="btn btn-primary">update</button>
+                              
+                            </form>
+                            </div>
                           </div>
                         </div>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <button type="submit" class="btn btn-secondary btn-sm">update</button>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <form action="deleteCategory" method="get">
-                          <a href="/deleteCategory/{{$categories->id}}" type="button" class="btn btn-success btn-sm">delete</a>
-                        </form>
-                      </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {{ $category->links() }}
-  <!--   Core JS Files   -->
-  <script src="../assetss/js/core/popper.min.js"></script>
+                      </div>
+                      <script src="../assetss/js/core/popper.min.js"></script>
   <script src="../assetss/js/core/bootstrap.min.js"></script>
   <script src="../assetss/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assetss/js/plugins/smooth-scrollbar.min.js"></script>

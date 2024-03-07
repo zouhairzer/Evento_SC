@@ -27,11 +27,15 @@ class CategoryController extends Controller
         }
     }
 
+
+
     public function AfficheCategory()
     {
         $category = Category::paginate(5);
         return view('admin.table', compact('category'));
     }
+
+
 
     public function deleteCategory($id)
     {
@@ -41,12 +45,16 @@ class CategoryController extends Controller
         return redirect()->back();
     }
  
+
+
     public function getCategory($id)
     {
         $category = Category::find($id);
         return view('admin.update_category',compact('category'));
     }
 
+
+    
     public function updateCategory(Request $request)
     {
         $category = Category::findOrFail($request->id);
@@ -57,15 +65,13 @@ class CategoryController extends Controller
     }
 
 
-    public function filterByCategory(Request $request)
+    public function filter(Request $request)
     {
-        $query = Category::query();
+        
+        $category= $request->input('category');
 
-        if($request->filled('category')){
-            $query->where('category',$request->category);
-        }
+        $categories = Category::where('category',$category)->get();
 
-        $evenement = $query->paginate(2);
-        return view('index', compact('evenement'));
+        return view('index', compact('categories'));
     }
 }

@@ -63,11 +63,25 @@
                                                 <button type="submit" style="border:none; background:white; color:blue; cursor: pointer;">logout</button>
                                             </form>
                                         </li>
+                                        
                                     </ul>
                                 </nav>
                             </div>
                             <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                <a href="#" class="btn header-btn">Get Your Ticket</a>
+                            <div class="filter-container">
+                                <form action="/filter" method="GET" class="form-inline">
+                                    <div class="form-group mr-2">
+                                        <select name="category" id="category" class="form-select form-select-sm" aria-label=".form-select-sm example" style="background-color: white; color: blue; border: 1px solid blue;">
+                                            <option value="">All Option</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->category }}">{{ $category->category }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <!-- Style the button to match the "Get Your Ticket" button -->
+                                    <button type="submit" style="background-color: white; color: blue; border: 0px solid blue; height: 40px; font-size: 20px; padding: 0 10px; cursor: pointer;" onmouseover="this.style.backgroundColor='#e6e6e6'" onmouseout="this.style.backgroundColor='white'">Filter</button>
+                                </form>
+                            </div>
                             </div>
                         </div>
                     </div>   
@@ -150,12 +164,9 @@
         <!-- Counter Section End -->
     </div>
     <!-- slider Area End-->
-    <!--? About Law Start-->
-    <form method="get" action="">
-
-    </form>
-    @foreach($AfficheEvenements as $AfficheEvenement)
+    <!-- About Law Start -->
     <section class="about-low-area section-padding2">
+        @foreach($AfficheEvenements as $AfficheEvenement)
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">

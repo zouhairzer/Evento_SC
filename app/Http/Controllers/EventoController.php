@@ -68,12 +68,23 @@ class EventoController extends Controller
         return view('organisateur.orTables');
     }
 
-    public function getEvenement()
+
+
+    public function filter(Request $request)
     {
-        $AfficheEvenements = DB::table('categories')->join('evenements', 'categories.id', '=', 'evenements.category')
-                                                    ->select('evenements.*','categories.category')
-                                                    ->paginate(2);
-        return view('index',compact('AfficheEvenements'));
+        $category =  $request->input('category');
+
+        $query = DB::table('evenements')->join('categories','evenements.category','=','categories.id')
+                                        ->select('evenements.*','categories.category');
+                                        
+        if($category){
+            $query->where('categories.category',$category);
+        }
+
+        $AfficheEvenements = $query->paginate(5);
+        $categories = Category::all();
+        
+        return view('index',compact('AfficheEvenements','categories'));
 
     }
 }

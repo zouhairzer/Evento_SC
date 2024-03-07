@@ -41,7 +41,7 @@ Route::get('/orDashboard',[EventoController::class,'afficheorDashboard']);
 
 Route::get('/orTables',[EventoController::class,'afficheorTables']);
 
-Route::get('/',[EventoController::class,'getEvenement']);
+Route::get('/filter', [EventoController::class, 'filter']);
 
 ////////////////////////// AUTHENTIFICATION && RESET PASSWORD //////////////////////////
 
@@ -68,6 +68,8 @@ Route::get('/deleteCategory/{id}',[CategoryController::class,'deleteCategory']);
 Route::get('/update_category/{id}',[CategoryController::class,'getCategory']);
 
 Route::post('/update/category',[CategoryController::class,'updateCategory']);
+
+
 
 //////////////////////////////////////// Evenement  ////////////////////////////////////////
 

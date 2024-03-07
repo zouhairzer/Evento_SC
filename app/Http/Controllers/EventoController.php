@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Evenement;
+use App\Models\Category;
+use Illuminate\Pagination\Paginator;
 
 class EventoController extends Controller
 {
-    public function index()
-    {
-        return view('index');
-    }
-
-
-    
+    // public function index()
+    // {
+    //     return view('index');
+    // }
     
     public function afficheLogin()
     {
@@ -64,5 +66,14 @@ class EventoController extends Controller
     public function afficheorTables()
     {
         return view('organisateur.orTables');
+    }
+
+    public function getEvenement()
+    {
+        $AfficheEvenements = DB::table('categories')->join('evenements', 'categories.id', '=', 'evenements.category')
+                                                    ->select('evenements.*','categories.category')
+                                                    ->paginate(2);
+        return view('index',compact('AfficheEvenements'));
+
     }
 }

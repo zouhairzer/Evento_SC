@@ -151,6 +151,10 @@
     </div>
     <!-- slider Area End-->
     <!--? About Law Start-->
+    <form method="get" action="">
+
+    </form>
+    @foreach($AfficheEvenements as $AfficheEvenement)
     <section class="about-low-area section-padding2">
         <div class="container">
             <div class="row">
@@ -158,9 +162,9 @@
                     <div class="about-caption mb-50">
                         <!-- Section Tittle -->
                         <div class="section-tittle mb-35">
-                            <h2>The Biggest Digital Conference.</h2>
+                            <h2>{{ $AfficheEvenement->titre }}</h2>
                         </div>
-                        <p>There arge many variations ohf passages of sorem gpsum ilable, but the majority have suffered alteration in some form, by ected humour, or randomised words whi.rere arge many variations ohf passages of sorem gpsum ilable.</p>
+                        <p>{{ $AfficheEvenement->description }}</p>
                         <p>There arge many variations ohf passages of sorem gpsum ilable, but the majority have suffered alteration in.</p>
                     </div>
                     <div class="row">
@@ -171,7 +175,7 @@
                                 </div>
                                 <div class="caption">
                                     <h5>Where</h5>
-                                    <p>New York, United States</p>
+                                    <p>{{ $AfficheEvenement->lieu }}</p>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +186,7 @@
                                 </div>
                                 <div class="caption">
                                     <h5>When</h5>
-                                    <p>Jan. 21. 2021</p>
+                                    <p>{{ $AfficheEvenement->date }}</p>
                                 </div>
                             </div>
                         </div>
@@ -193,16 +197,18 @@
                     <!-- about-img -->
                     <div class="about-img ">
                         <div class="about-font-img d-none d-lg-block">
-                            <img src="assets/img/gallery/about2.png" alt="">
+                            <img src="images/{{ $AfficheEvenement->image }}" alt="">
                         </div>
                         <div class="about-back-img ">
-                            <img src="assets/img/gallery/about1.png" alt="">
+                            <img src="images/{{ $AfficheEvenement->image }}" alt="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @endforeach
+    {{ $AfficheEvenements->links() }}
     <!-- About Law End-->
     <!--? Brand Area Start -->
     <section class="team-area pt-180 pb-100 section-bg" data-background="assets/img/gallery/section_bg02.png">
@@ -820,6 +826,7 @@
     </section>
     <!-- Blog Area End -->
     </main>
+    
     <footer>
         <!-- Footer Start-->
         <div class="footer-area footer-padding">

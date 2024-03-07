@@ -56,4 +56,16 @@ class CategoryController extends Controller
         return redirect('/table')->with('succes','Update Success'); 
     }
 
+
+    public function filterByCategory(Request $request)
+    {
+        $query = Category::query();
+
+        if($request->filled('category')){
+            $query->where('category',$request->category);
+        }
+
+        $evenement = $query->paginate(2);
+        return view('index', compact('evenement'));
+    }
 }

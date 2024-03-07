@@ -23,7 +23,7 @@ use App\Http\Controllers\EvenementController;
 
 //////////////////////////////////////// VIEWS ////////////////////////////////////////
 
-Route::get('/',[EventoController::class,'index']);
+// Route::get('/',[EventoController::class,'index']);
 
 Route::get('/login',[EventoController::class,'afficheLogin']);
 
@@ -40,6 +40,8 @@ Route::get('/table',[EventoController::class,'afficheTable']);
 Route::get('/orDashboard',[EventoController::class,'afficheorDashboard']);
 
 Route::get('/orTables',[EventoController::class,'afficheorTables']);
+
+Route::get('/',[EventoController::class,'getEvenement']);
 
 ////////////////////////// AUTHENTIFICATION && RESET PASSWORD //////////////////////////
 

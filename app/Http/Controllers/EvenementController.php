@@ -35,6 +35,8 @@ class EvenementController extends Controller
             $evenement->lieu = $request->lieu;
             $evenement->nombre_places_disponibles = $request->nombre_places_disponibles;
             $evenement->category = $request->category;
+            $evenement->date_fin = $request->date_fin;
+            $evenement->prix = $request->prix;
             // dd($evenement);
             $evenement->save();
     
@@ -52,6 +54,7 @@ class EvenementController extends Controller
         $AfficheEvenements = DB::table('categories')->join('evenements', 'categories.id', '=', 'evenements.category')
                                                     ->select('evenements.*','categories.category')
                                                     ->paginate(4);
+        // dd($AfficheEvenements);
                                 
         $category = Category::all();
 
@@ -85,6 +88,7 @@ class EvenementController extends Controller
         $evenement->lieu = $request->lieu;
         $evenement->nombre_places_disponibles = $request->nombre_places_disponibles;
         $evenement->category = $request->category;
+        $evenement->prix = $request->prix;
 
         if($request->hasFile('image')){
             $uploadFile = 'images/';
@@ -110,4 +114,37 @@ class EvenementController extends Controller
 
         return view('index',compact('evenement'));
     }
+
+/////////////////////////////////////////////////  ADMIN Affche, Reject && Accept /////////////////////////////////////////////////
+
+    public function fetchEvenements()
+    {
+        $AfficheEvenements = DB::table('categories')->join('evenements', 'categories.id', '=', 'evenements.category')
+                                                    ->select('evenements.*','categories.category')
+                                                    ->paginate(4);
+        $category = Category::all();
+
+        return view('admin.evenements',compact('AfficheEvenements','category'));
+    }
+
+
+    public function AcRjEvenemen(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:evenements,id',
+            'status' => 'required|in:accepter,rejecter',
+        ]);
+    
+        if($request){
+            $evenement = Evenement::findOrFail($request->id);
+            $evenement->status = $request->status;
+            // dd($evenement);
+            $evenement->save();
+            return redirect()->back()->with('success','The Event is Accepted');
+        }
+        else{
+            return redirect()->back()->with('error','The Event is Rejected');
+        }
+    }
+    
 }

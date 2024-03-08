@@ -17,6 +17,8 @@ class Evenement extends Model
         'date',
         'lieu',
         'nombre_places_disponibles',
-        'categories'
+        'categories',
+        'date_fin',
+        'prix'
     ];
 }

@@ -43,7 +43,9 @@ Route::get('/orTables',[EventoController::class,'afficheorTables']);
 
 Route::get('/filter', [EventoController::class, 'filter']);
 
-Route::get('/search',[EventoController::class,'searchFilter']);
+Route::get('/',[EventoController::class,'filter'])->name('search');
+
+Route::get('/details/{id}',[EventoController::class,'details']);
 
 ////////////////////////// AUTHENTIFICATION && RESET PASSWORD //////////////////////////
 
@@ -75,6 +77,7 @@ Route::post('/update/category',[CategoryController::class,'updateCategory']);
 
 //////////////////////////////////////// Evenement  ////////////////////////////////////////
 
+
 Route::post('/orTables',[EvenementController::class,'AjouterEvenement']);
 
 Route::get('/orTables',[EvenementController::class,'AfficheEvenement']);
@@ -84,6 +87,11 @@ Route::get('/deleteEvenement/{id}',[EvenementController::class,'deleteEvenements
 Route::get('/update_Evenement/{id}',[EvenementController::class,'getEvenements']);
 
 Route::post('/update/Evenement',[EvenementController::class,'updateEvenements']);
+
+Route::get('/evenements',[EvenementController::class,'fetchEvenements']); ///admin : afficher pour accpter ou rejecter
+
+Route::post('/update/Evenement', [EvenementController::class, 'AcRjEvenemen']);///admin :  Accepter ou rejecter un evenement 
+
 
 //////////////////////////////////////// users  ////////////////////////////////////////
 

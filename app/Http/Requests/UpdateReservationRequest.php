@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEvenementRequest extends FormRequest
+class UpdateReservationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,7 @@ class StoreEvenementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'titre',
-            'description',
-            'image',
-            'date',
-            'lieu',
-            'nombre_places_disponibles',
-            'date_fin'
+            //
         ];
     }
 }

@@ -68,15 +68,16 @@ class EventoController extends Controller
         return view('organisateur.orTables');
     }
 
+/////////////////////////////////////////////////////////  Filter /////////////////////////////////////////////////////////
 
-
-    public function searchFilter(Request $request)
+    public function filter(Request $request)
     {
         $category =  $request->input('category');
         $titre = $request->input('search');
 
         $query = DB::table('evenements')->join('categories','evenements.category','=','categories.id')
-                                        ->select('evenements.*','categories.category');
+                                        ->select('evenements.*','categories.category')
+                                        ->where('status','=','accepter');
                                         
         if($titre){
             $query->where('titre', 'like', "%$titre%");
@@ -92,4 +93,13 @@ class EventoController extends Controller
         return view('index',compact('AfficheEvenements','categories'));
 
     }
+
+/////////////////////////////////////////////////////////  Details  /////////////////////////////////////////////////////////
+
+    public function details($id)
+    {
+        $details = Evenement::find($id);
+        return view('details', compact('details'));
+    }
+
 }

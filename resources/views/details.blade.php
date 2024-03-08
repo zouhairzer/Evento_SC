@@ -10,18 +10,18 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 	<!-- CSS here -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/gijgo.css">
-	<link rel="stylesheet" href="assets/css/animate.min.css">
-	<link rel="stylesheet" href="assets/css/magnific-popup.css">
-	<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-	<link rel="stylesheet" href="assets/css/themify-icons.css">
-	<link rel="stylesheet" href="assets/css/slick.css">
-	<link rel="stylesheet" href="assets/css/nice-select.css">
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/assets/css/slicknav.css">
+    <link rel="stylesheet" href="/assets/css/flaticon.css">
+    <link rel="stylesheet" href="/assets/css/gijgo.css">
+	<link rel="stylesheet" href="/assets/css/animate.min.css">
+	<link rel="stylesheet" href="/assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="/assets/css/themify-icons.css">
+	<link rel="stylesheet" href="/assets/css/slick.css">
+	<link rel="stylesheet" href="/assets/css/nice-select.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <!-- ? Preloader Start -->
@@ -45,7 +45,7 @@
                     <!-- Logo -->
                     <div class="col-xl-2 col-lg-2 col-md-1">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                            <a href="index.html"><img src="/assets/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
                     
@@ -66,21 +66,6 @@
                                     </ul>
                                 </nav>
                             </div>
-                            <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                            <div class="filter-container">
-                                <form action="/filter" method="GET" class="form-inline">
-                                    <div class="form-group mr-2">
-                                        <select name="category" id="category" class="form-select form-select-sm" aria-label=".form-select-sm example" style="background-color: white; color: blue; border: 1px solid blue;" >
-                                            <option value="">All Option</option>
-                                            @foreach($categories as $category)
-                                                <option value="{{ $category->category }}">{{ $category->category }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <!-- Style the button to match the "Get Your Ticket" button -->
-                                    <button type="submit" style="background-color: white; color: blue; border: 0px solid blue; height: 40px; font-size: 17px; padding: 0 10px; cursor: pointer;" onmouseover="this.style.backgroundColor='#e6e6e6'" onmouseout="this.style.backgroundColor='white'">Filter</button>
-                                </form>
-                            </div>
                             </div>
                         </div>
                     </div>   
@@ -94,7 +79,7 @@
     </div>
     <!-- Header End -->
 </header>
-<main>
+</main>
     <!--? slider Area Start-->
     <div class="slider-area position-relative">
         <div class="slider-active">
@@ -172,16 +157,16 @@
     <!-- slider Area End-->
     <!-- About Law Start -->
     <section class="about-low-area section-padding2">
-        @foreach($AfficheEvenements as $AfficheEvenement)
+        
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="about-caption mb-50">
                         <!-- Section Tittle -->
                         <div class="section-tittle mb-35">
-                            <h2>{{ $AfficheEvenement->titre }}</h2>
+                            <h2>{{ $details->titre }}</h2>
                         </div>
-                        <p></p>
+                        <p>{{ $details->description }}</p>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10">
@@ -191,7 +176,7 @@
                                 </div>
                                 <div class="caption">
                                     <h5>Where</h5>
-                                    <p>{{ $AfficheEvenement->lieu }}</p>
+                                    <p>{{ $details->lieu }}</p>
                                 </div>
                             </div>
                         </div>
@@ -202,16 +187,16 @@
                                 </div>
                                 <div class="caption">
                                     <h5>When</h5>
-                                    <p>Dtae début : {{ $AfficheEvenement->date }}</p>
-                                    <p>Dtae fin : {{ $AfficheEvenement->date_fin }}</p>
+                                    <p>Dtae début : {{ $details->date }}</p>
+                                    <p>Dtae fin : {{ $details->date_fin }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center;">
-                        <a href="" class="btn mt-50">{{ $AfficheEvenement->prix }} DH</a>
-                        <a href="/details/{{ $AfficheEvenement->id}}" class="text-body text-sm font-weight-bold  mx-5 icon-move-right mt-5" href="javascript:;">
-                            Read More
+                        <a href="#" class="btn mt-50">{{ $details->prix }} DH</a>
+                        <a href="/" class="text-body text-sm font-weight-bold  mx-5 icon-move-right mt-5" href="javascript:;">
+                            Back TO
                             <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -220,18 +205,18 @@
                     <!-- about-img -->
                     <div class="about-img ">
                         <div class="about-font-img d-none d-lg-block">
-                            <img src="images/{{ $AfficheEvenement->image }}" alt="">
+                            <img src="/images/{{ $details->image }}" alt="">
                         </div>
                         <div class="about-back-img ">
-                            <img src="images/{{ $AfficheEvenement->image }}" alt="">
+                            <img src="/images/{{ $details->image }}" alt="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    @endforeach
-    {{ $AfficheEvenements->links() }}
+    
+   
     </main>
     
     <footer>
@@ -243,7 +228,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <!-- logo -->
                         <div class="footer-logo mb-20">
-                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                        <a href="index.html"><img src="/assets/img/logo/logo2_footer.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
@@ -276,8 +261,8 @@
                          <div class="col-xl-10 col-lg-8 ">
                              <div class="footer-copy-right">
                                  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                              </div>
                          </div>
                          <div class="col-xl-2 col-lg-4">
@@ -295,7 +280,8 @@
         <!-- Footer End-->
     </footer>
     <!-- Scroll Up -->
-    <div id="back-top" >
+      <!-- Scroll Up -->
+      <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
 

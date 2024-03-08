@@ -297,31 +297,124 @@
       </div>
     </nav>
     <!-- End Navbar -->
-
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="container-fluid py-4 mx-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-5 text-center">
+              <h4>Evenements</h4>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Evenement</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form  method="post" enctype="multipart/form-data">
+                            @csrf
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Titre:</label>
+                            <input type="text" name="titre" class="form-control" id="recipient-name">
+                          </div>    
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Description:</label>
+                            <input type="text" name="description" class="form-control" id="recipient-name">
+                          </div>    
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Image:</label>
+                            <input type="file" name="image" class="form-control" id="recipient-name">
+                          </div>    
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Date D'achat</label>
+                            <input type="date" name="date" class="form-control" id="recipient-name">
+                          </div>    
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Date De fin</label>
+                            <input type="date" name="date_fin" class="form-control" id="recipient-name">
+                          </div>    
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Lieu:</label>
+                            <input type="text" name="lieu" class="form-control" id="recipient-name">
+                          </div>    
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">prix:</label>
+                            <input type="text" name="prix" class="form-control" id="recipient-name">
+                          </div>    
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Nombre_places_disponibles:</label>
+                            <input type="text" name="nombre_places_disponibles" class="form-control" id="recipient-name">
+                          </div>    
+                          <div>
+                        <select name="category" id="category">
+                        @foreach($category as $categorie)
+                          <option name="category" value="{{ $categorie->id }}">{{ $categorie->category }}</option>
+                        @endforeach
+                        </select>
+                      </div>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                @foreach($AfficheEvenements as $AfficheEvenement)
+                <div class="row mt-4 justify-content-center">
+                  <div class="col-lg-7 mb-lg-0 mb-4">
+                    <div class="card">
+                      <div class="card-body p-3">
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="d-flex flex-column h-100">
+                              <h4 class="font-weight-bolder">{{ $AfficheEvenement->titre }}</h4>
+                              <h6 class="mb-1 pt-2 text-bold">{{ $AfficheEvenement->lieu }}</h6>
+                              <p class="">{{ $AfficheEvenement->description }}</p>   
+                              <p class="">{{ $AfficheEvenement->date }}</p>  
+                                <form action="/update/Evenement" method="post">
+                                    @csrf
+                                    <div class="align-middle text-center text-sm">
+                                        <input type="hidden" name="id" value="{{$AfficheEvenement->id}}">
+                                        <button name="status" value="rejecter" type="submit" class="btn btn-danger btn-sm">Rejecter</button>
+                                    </div>
+                                    <div class="align-middle text-center text-sm">
+                                        <button name="status" value="accepter" type="submit" class="btn btn-success btn-sm">Accepter</button>
+                                    </div>
+                                </form>
+                              <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
+                              {{$AfficheEvenement->category}}
+                                <i class="fas text-sm ms-1" aria-hidden="true"></i>
+                              </a>
                             </div>
-                            <div class="modal-body">
-                            <form action="/update/category" method="POST">
-                                @csrf
-
-                                <input type="hidden" name="id" value="{{ $category->id }}">
-                                <div class="mb-3">
-                                    <label for="category" class="col-form-label">Category</label>
-                                    <input type="text" class="form-control" name="category" id="category" value="{{ $category->category }}">
-                                </div>
-                                
-                                    <button type="submit" class="btn btn-primary">update</button>
-                              
-                            </form>
+                          </div>
+                          <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                            <div class=" border-radius-lg h-100">
+                              <img src="../assetss/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
+                              <div class="position-relative d-flex align-items-center justify-content-center h-100">
+                                <img class="w-100 position-relative z-index-2 pt-4" src="images/{{ $AfficheEvenement->image }}" alt="rocket">
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <script src="../assetss/js/core/popper.min.js"></script>
+                    </div>
+                  </div>
+              </div>
+             
+            @endforeach
+            {{ $AfficheEvenements->links() }}
+            </div>
+          </div>
+        </div>
+      </div>
+  <!--   Core JS Files   -->
+  
+  <script src="../assetss/js/core/popper.min.js"></script>
   <script src="../assetss/js/core/bootstrap.min.js"></script>
   <script src="../assetss/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assetss/js/plugins/smooth-scrollbar.min.js"></script>

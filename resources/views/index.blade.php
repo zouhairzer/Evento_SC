@@ -54,13 +54,18 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a style="color:blue; " href="/">Home</a></li>
-                                        <li><a style="color:blue; " href="/login">Sign In</a></li>
-                                        <li><a style="color:blue; " href="/register">Sign up</a></li>
+                                        <li>
+                                            <form action="/search" method="GET">
+                                                <input type="search" name="search">
+                                                <button type="submit">Search</button>
+                                            </form>
+                                        </li>
+                                        <li><a style="color:blue; " onmouseover="this.style.backgroundColor='#e6e6e6'" onmouseout="this.style.backgroundColor='white'" href="/login">Sign In</a></li>
+                                        <li><a style="color:blue; " onmouseover="this.style.backgroundColor='#e6e6e6'" onmouseout="this.style.backgroundColor='white'" href="/register">Sign up</a></li>
                                         <li>
                                             <form action="/logout" method="get">
                                                 @csrf
-                                                <button type="submit" style="border:none; background:white; color:blue; cursor: pointer;">logout</button>
+                                                <button type="submit" style="border:none; background:white; color:blue; cursor: pointer;" onmouseover="this.style.backgroundColor='#e6e6e6'" onmouseout="this.style.backgroundColor='white'">logout</button>
                                             </form>
                                         </li>
                                         
@@ -71,7 +76,7 @@
                             <div class="filter-container">
                                 <form action="/filter" method="GET" class="form-inline">
                                     <div class="form-group mr-2">
-                                        <select name="category" id="category" class="form-select form-select-sm" aria-label=".form-select-sm example" style="background-color: white; color: blue; border: 1px solid blue;">
+                                        <select name="category" id="category" class="form-select form-select-sm" aria-label=".form-select-sm example" style="background-color: white; color: blue; border: 1px solid blue;" >
                                             <option value="">All Option</option>
                                             @foreach($categories as $category)
                                                 <option value="{{ $category->category }}">{{ $category->category }}</option>
@@ -79,7 +84,7 @@
                                         </select>
                                     </div>
                                     <!-- Style the button to match the "Get Your Ticket" button -->
-                                    <button type="submit" style="background-color: white; color: blue; border: 0px solid blue; height: 40px; font-size: 20px; padding: 0 10px; cursor: pointer;" onmouseover="this.style.backgroundColor='#e6e6e6'" onmouseout="this.style.backgroundColor='white'">Filter</button>
+                                    <button type="submit" style="background-color: white; color: blue; border: 0px solid blue; height: 40px; font-size: 17px; padding: 0 10px; cursor: pointer;" onmouseover="this.style.backgroundColor='#e6e6e6'" onmouseout="this.style.backgroundColor='white'">Filter</button>
                                 </form>
                             </div>
                             </div>

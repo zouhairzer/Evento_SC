@@ -43,6 +43,8 @@ Route::get('/orTables',[EventoController::class,'afficheorTables']);
 
 Route::get('/filter', [EventoController::class, 'filter']);
 
+Route::get('/search',[EventoController::class,'searchFilter']);
+
 ////////////////////////// AUTHENTIFICATION && RESET PASSWORD //////////////////////////
 
 Route::post('/register',[AuthController::class,'create']);

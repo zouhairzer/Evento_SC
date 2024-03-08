@@ -70,13 +70,18 @@ class EventoController extends Controller
 
 
 
-    public function filter(Request $request)
+    public function searchFilter(Request $request)
     {
         $category =  $request->input('category');
+        $titre = $request->input('search');
 
         $query = DB::table('evenements')->join('categories','evenements.category','=','categories.id')
                                         ->select('evenements.*','categories.category');
                                         
+        if($titre){
+            $query->where('titre', 'like', "%$titre%");
+        }
+
         if($category){
             $query->where('categories.category',$category);
         }

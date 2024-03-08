@@ -101,4 +101,13 @@ class EvenementController extends Controller
 
         return redirect('/orTables');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+
+        $evenement = Evenement::where('titre', 'like','%%')->get();
+
+        return view('index',compact('evenement'));
+    }
 }

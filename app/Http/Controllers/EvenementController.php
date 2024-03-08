@@ -68,6 +68,8 @@ class EvenementController extends Controller
         return redirect('/orTables');
     }
 
+
+    
     public function getEvenements($id)
     {
         $getEvenement = Evenement::find($id);
@@ -76,6 +78,11 @@ class EvenementController extends Controller
         // dd($getCategory);
         return view('organisateur.update_Evenement', compact('getEvenement','getCategory'));
     }
+
+
+
+
+
 
     public function updateEvenements(Request $request)
     {

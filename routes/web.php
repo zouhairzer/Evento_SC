@@ -41,11 +41,11 @@ Route::get('/orDashboard',[EventoController::class,'afficheorDashboard'])->middl
 
 Route::get('/orTables',[EventoController::class,'afficheorTables'])->middleware('Auth');
 
-Route::get('/filter', [EventoController::class, 'filter'])->middleware('Auth');
+Route::get('/filter', [EventoController::class, 'filter'])->name('search');
 
 Route::get('/',[EventoController::class,'filter']);
 
-Route::get('/details/{id}',[EventoController::class,'details'])->middleware('Auth');
+Route::get('/details/{id}',[EventoController::class,'details']);
 
 ////////////////////////// AUTHENTIFICATION && RESET PASSWORD //////////////////////////
 

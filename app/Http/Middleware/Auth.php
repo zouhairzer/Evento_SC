@@ -19,7 +19,9 @@ class Auth
     public function handle(Request $request, Closure $next): Response
     {
         if(!$request->cookie('token')){
-
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
         }
         else{
             $token = $request->cookie('token');

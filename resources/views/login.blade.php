@@ -48,15 +48,19 @@
 
                 <!-- Register buttons -->
                 <div class="form-check d-flex justify-content-center mb-4">
-                  <a href="/forgot_Password" class="form-check-label" >
-                    Forgot Password
+                  <a href="/register" class="form-check-label" >
+                    Create Account
                   </a>
                 </div>
-
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block mb-4">
                   Sign up
                 </button>
+                <div class="form-check d-flex justify-content-center mb-4">
+                  <a href="/forgot_Password" class="form-check-label" >
+                    Forgot Password
+                  </a>
+                </div>
 
 </body>
 </html>

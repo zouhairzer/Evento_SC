@@ -194,12 +194,18 @@
                         </div>
                     </div>
                     <div style="display: flex; align-items: center;">
-                        <a href="#" class="btn mt-50">{{ $details->prix }} DH</a>
-                        <a href="/" class="text-body text-sm font-weight-bold  mx-5 icon-move-right mt-5" href="javascript:;">
-                            Back TO
-                            <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                        </a>
-                    </div>
+
+                            <form action="/get/ticket" method="post">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{ $details->user_id }}">
+                                <input type="hidden" name="event_id"  value="{{ $details->id }}">
+                                <button type="submit" class="btn mt-50">{{ $details->prix }} DH</a>
+                            </form>
+                            <a href="/" class="text-body text-sm font-weight-bold  mx-5 icon-move-right mt-5" href="javascript:;">
+                                Back TO
+                                <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                            </a>
+                        </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <!-- about-img -->
@@ -214,9 +220,7 @@
                 </div>
             </div>
         </div>
-    </section>
-    
-   
+    </section>   
     </main>
     
     <footer>

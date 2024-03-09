@@ -220,10 +220,10 @@
                     <!-- about-img -->
                     <div class="about-img ">
                         <div class="about-font-img d-none d-lg-block">
-                            <img src="images/{{ $AfficheEvenement->image }}" alt="">
+                            <img src="images/{{ $AfficheEvenement->image }}"  alt="Evento">
                         </div>
                         <div class="about-back-img ">
-                            <img src="images/{{ $AfficheEvenement->image }}" alt="">
+                            <img src="images/{{ $AfficheEvenement->image }}" alt="Evento">
                         </div>
                     </div>
                 </div>

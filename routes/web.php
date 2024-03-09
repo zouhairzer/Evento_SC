@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\ReservationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,21 +30,21 @@ Route::get('/login',[EventoController::class,'afficheLogin']);
 
 Route::get('/register',[EventoController::class,'afficheRegister']);
 
-Route::get('/forgot_Password',[EventoController::class,'afficheforgot_Password'])->middleware('Auth');
+Route::get('/forgot_Password',[EventoController::class,'afficheforgot_Password']);
 
-Route::get('/reset/{token}',[EventoController::class,'afficheReset'])->middleware('Auth');
+Route::get('/reset/{token}',[EventoController::class,'afficheReset']);
 
-Route::get('/dashboard',[EventoController::class,'afficheDashboard'])->middleware('Auth');
+Route::get('/dashboard',[EventoController::class,'afficheDashboard']);
 
-Route::get('/table',[EventoController::class,'afficheTable'])->middleware('Auth');
+Route::get('/table',[EventoController::class,'afficheTable']);
 
-Route::get('/orDashboard',[EventoController::class,'afficheorDashboard'])->middleware('Auth');
+Route::get('/orDashboard',[EventoController::class,'afficheorDashboard']);
 
-Route::get('/orTables',[EventoController::class,'afficheorTables'])->middleware('Auth');
+Route::get('/orTables',[EventoController::class,'afficheorTables']);
 
-Route::get('/filter', [EventoController::class, 'filter'])->name('search');
+Route::get('/filter', [EventoController::class, 'filter']);
 
-Route::get('/',[EventoController::class,'filter']);
+Route::get('/',[EventoController::class,'filter'])->name('search');
 
 Route::get('/details/{id}',[EventoController::class,'details']);
 
@@ -63,44 +64,48 @@ Route::get('/register',[RoleController::class,'getRoles']);
 
 //////////////////////////////////////// Category ////////////////////////////////////////
 
-Route::post('/AjouterCategory',[CategoryController::class,'AjouterCategory'])->middleware('Auth');
+Route::post('/AjouterCategory',[CategoryController::class,'AjouterCategory']);
 
-Route::get('/table',[CategoryController::class,'AfficheCategory'])->middleware('Auth');
+Route::get('/table',[CategoryController::class,'AfficheCategory']);
 
-Route::get('/deleteCategory/{id}',[CategoryController::class,'deleteCategory'])->middleware('Auth');
+Route::get('/deleteCategory/{id}',[CategoryController::class,'deleteCategory']);
 
-Route::get('/update_category/{id}',[CategoryController::class,'getCategory'])->middleware('Auth');
+Route::get('/update_category/{id}',[CategoryController::class,'getCategory']);
 
-Route::post('/update/category',[CategoryController::class,'updateCategory'])->middleware('Auth');
+Route::post('/update/category',[CategoryController::class,'updateCategory']);
 
 
 
 //////////////////////////////////////// Evenement  ////////////////////////////////////////
 
 
-Route::post('/orTables',[EvenementController::class,'AjouterEvenement'])->middleware('Auth');
+Route::post('/orTables',[EvenementController::class,'AjouterEvenement']);
 
-Route::get('/orTables',[EvenementController::class,'AfficheEvenement'])->middleware('Auth');
+Route::get('/orTables',[EvenementController::class,'AfficheEvenement']);
 
-Route::get('/deleteEvenement/{id}',[EvenementController::class,'deleteEvenements'])->middleware('Auth');
+Route::get('/deleteEvenement/{id}',[EvenementController::class,'deleteEvenements']);
 
-Route::get('/update_Evenement/{id}',[EvenementController::class,'getEvenements'])->middleware('Auth');
+Route::get('/update_Evenement/{id}',[EvenementController::class,'getEvenements']);
 
-Route::post('/update/Evenement',[EvenementController::class,'updateEvenements'])->middleware('Auth');
+Route::post('/update/Evenement',[EvenementController::class,'updateEvenements']);
 
-Route::get('/evenements',[EvenementController::class,'fetchEvenements'])->middleware('Auth'); ///admin : afficher pour accpter ou rejecter
+Route::get('/evenements',[EvenementController::class,'fetchEvenements']); ///admin : afficher pour accpter ou rejecter
 
-Route::post('/update/Evenement', [EvenementController::class, 'AcRjEvenemen'])->middleware('Auth');///admin :  Accepter ou rejecter un evenement 
+Route::post('/update-evenements', [EvenementController::class, 'AcRjEvenemen']);///admin :  Accepter ou rejecter un evenement
+
+Route::post('/update/type', [EvenementController::class, 'type']);///admin :  Manuell ou Auto reservation 
 
 
 //////////////////////////////////////// users  ////////////////////////////////////////
 
-Route::get('/users',[AuthController::class,'afficheUsers'])->middleware('Auth');
+Route::get('/users',[AuthController::class,'afficheUsers']);
 
-Route::post('/users',[AuthController::class,'ajouterUser'])->middleware('Auth');
+Route::post('/users',[AuthController::class,'ajouterUser']);
 
-Route::get('/deleteUser/{id}',[AuthController::class,'deleteUser'])->middleware('Auth');
+Route::get('/deleteUser/{id}',[AuthController::class,'deleteUser']);
 
-Route::get('/update_user/{id}',[AuthController::class,'getUser'])->middleware('Auth');
+Route::get('/update_user/{id}',[AuthController::class,'getUser']);
 
-Route::post('/update/user',[AuthController::class,'updateUser'])->middleware('Auth');
+Route::post('/update/user',[AuthController::class,'updateUser']);
+
+Route::post('/get/ticket',[ReservationController::class, 'ticket']);

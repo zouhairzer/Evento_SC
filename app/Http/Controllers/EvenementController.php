@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Evenement;
 use App\Models\Category;
+use App\Models\User;
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Firebase\JWT\JWT;
+use Firebase\JWT\key;
+
 
 class EvenementController extends Controller
 {
@@ -37,6 +41,9 @@ class EvenementController extends Controller
             $evenement->category = $request->category;
             $evenement->date_fin = $request->date_fin;
             $evenement->prix = $request->prix;
+            $evenement->type = $request->type;
+            $evenement->user_id = $request->user_id;
+
             // dd($evenement);
             $evenement->save();
     
@@ -50,17 +57,28 @@ class EvenementController extends Controller
 
     public function AfficheEvenement()
     {
+        // $token = $request->cookie('token');
+        // $data = JWT::decode($token, new key($_ENV['JWT_SECRET'],'HS256'));
+
+        // DB::enableQueryLog();
 
         $AfficheEvenements = DB::table('categories')->join('evenements', 'categories.id', '=', 'evenements.category')
-                                                    ->select('evenements.*','categories.category')
+                                                    ->select('evenements.*', 'categories.category')
                                                     ->paginate(4);
-        // dd($AfficheEvenements);
-                                
-        $category = Category::all();
+    
+        // $queries = DB::getQueryLog();
+        // dd($queries);
 
-        return view('organisateur.orTables',compact('AfficheEvenements','category'));
+        // dd($AfficheEvenements);   
+
+        $category = Category::all();
+        $users = User::all();
+
+        return view('organisateur.orTables',compact('AfficheEvenements','category','users'));
     }
 
+
+    
     public function deleteEvenements($id)
     {
         $deleteEvenement =  Evenement::find($id);
@@ -68,26 +86,22 @@ class EvenementController extends Controller
         return redirect('/orTables');
     }
 
+/////////////////////////////////////////////////  Update Evenement /////////////////////////////////////////////////
 
-    
     public function getEvenements($id)
     {
+        
         $getEvenement = Evenement::find($id);
         $getCategory = Category::all();
 
+        // dd($getEvenement);
         // dd($getCategory);
         return view('organisateur.update_Evenement', compact('getEvenement','getCategory'));
     }
 
 
-
-
-
-
     public function updateEvenements(Request $request)
-    {
-        // dd($request);
-        
+    {  
         $evenement = Evenement::findOrFail($request->id);
         $evenement->titre = $request->titre;
         $evenement->description = $request->description;
@@ -95,7 +109,11 @@ class EvenementController extends Controller
         $evenement->lieu = $request->lieu;
         $evenement->nombre_places_disponibles = $request->nombre_places_disponibles;
         $evenement->category = $request->category;
-        $evenement->prix = $request->prix;
+        $evenement->prix = $request->prix; 
+        $evenement->type = $request->type; 
+        $evenement->user_id = $request->user_id; 
+        
+        dd($evenement);
 
         if($request->hasFile('image')){
             $uploadFile = 'images/';
@@ -108,10 +126,12 @@ class EvenementController extends Controller
             $evenement->image = $uploadFileName;
         }
 
+
         $evenement->save();
 
         return redirect('/orTables');
     }
+///////////////////////////////////////////////// Search /////////////////////////////////////////////////
 
     public function search(Request $request)
     {
@@ -134,6 +154,7 @@ class EvenementController extends Controller
         return view('admin.evenements',compact('AfficheEvenements','category'));
     }
 
+/////////////////////////////////////////////////  ADMIN , Reject && Accept /////////////////////////////////////////////////
 
     public function AcRjEvenemen(Request $request)
     {
@@ -153,5 +174,22 @@ class EvenementController extends Controller
             return redirect()->back()->with('error','The Event is Rejected');
         }
     }
+    
+/////////////////////////////////////////////////  organisateur , auto && manuell acceptation ticket /////////////////////////////////////////////////
+
+    public function type(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:evenements,id',
+            'type' => 'required|in:auto,manuell'
+        ]);
+        // dd($request);
+        $type = Evenement::findOrFail($request->id);
+        $type->type = $request->type;
+        $type->save();
+
+        return redirect()->back();
+    }
+
     
 }

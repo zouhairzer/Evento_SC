@@ -56,12 +56,24 @@ class AuthController extends Controller
             $jwt = JWT::encode($payload, $_ENV['JWT_SECRET'], $_ENV['JWT_ALGO']);
 
             $cookie = cookie('token', $jwt, 60);
-            return redirect('/')->withCookie($cookie);
+            if($user->role_id == 2 ){
+                return redirect('/orDashboard')->withCookie($cookie);
+            }
+            elseif($user->role_id == 1 ){
+                return redirect('/dashboard')->withCookie($cookie);
+            }
+            elseif($user->role_id ==  3){
+                return redirect('/')->withCookie($cookie);
+            }
+ 
         }else{
             return redirect()->back()->with('Eror','invalid Information');
         }
     }
-    
+
+
+
+
     public function logout()
     {
         Session::flush();
@@ -90,6 +102,8 @@ class AuthController extends Controller
             return redirect()->back()->with('Error','Email Not found');
         }
     }
+
+
 
 
     public function resetPassword($token, Request $request)
@@ -136,6 +150,7 @@ class AuthController extends Controller
     }
 
 
+
     public function ajouterUser(Request $request)
     {
         // dd($request);
@@ -155,6 +170,8 @@ class AuthController extends Controller
         }
     }
 
+
+
     public function deleteUser($id)
     {
         $user = User::find($id);
@@ -163,12 +180,16 @@ class AuthController extends Controller
         return redirect()->back();
     }
 
+
+
     public function getUser($id)
     { 
         $user = User::find($id);
         $role = Role::orderByDesc('id')->limit(2)->get();
          return view('admin.update_user', compact('user','role'));
     }
+
+
 
     public function updateUser(Request $request)
     {

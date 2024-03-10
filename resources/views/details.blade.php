@@ -157,7 +157,16 @@
     <!-- slider Area End-->
     <!-- About Law Start -->
     <section class="about-low-area section-padding2">
-        
+            @if(session('Accpeter'))
+                <div class="alert alert-success d-flex justify-content-center">
+                    {{ session('Accpeter') }}
+                </div>
+            @endif
+            @if(session('Rejecter'))
+                <div class="alert alert-danger d-flex justify-content-center">
+                    {{ session('Rejecter') }}
+                </div>
+            @endif
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
@@ -199,7 +208,7 @@
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $details->user_id }}">
                                 <input type="hidden" name="event_id"  value="{{ $details->id }}">
-                                <button type="submit" class="btn mt-50">{{ $details->prix }} DH</a>
+                                <button type="submit" class="btn mt-50">{{ $details->prix }} DH</button>
                             </form>
                             <a href="/" class="text-body text-sm font-weight-bold  mx-5 icon-move-right mt-5" href="javascript:;">
                                 Back TO

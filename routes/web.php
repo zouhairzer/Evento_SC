@@ -109,3 +109,6 @@ Route::get('/update_user/{id}',[AuthController::class,'getUser']);
 Route::post('/update/user',[AuthController::class,'updateUser']);
 
 Route::post('/get/ticket',[ReservationController::class, 'ticket']);
+
+Route::get('/details',[ReservationController::class, 'ticket']);
+

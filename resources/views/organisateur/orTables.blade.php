@@ -287,9 +287,14 @@
                                   @endforeach
                               </select>
                           </div>
-                          <div>
+                              <form  action="/update/type" method="post">
+                                @csrf
+                                <input name="id" type="hidden" value="{{$users->id}}">
+                                  <button name="type" type="submit" value="manuell" class="btn btn-primary">manuell</button>
+                                  <button name="type" type="submit" value="auto" class="btn btn-primary">auto      </button>
+                              </form>
+                            <div>
                           </div>
-                            <button type="submit" class="btn btn-primary">Ajouter</button>
                         </form>
                       </div>
                       <div class="modal-footer">
@@ -318,17 +323,11 @@
                               <p class="">{{ $AfficheEvenement->description }}</p>   
                               <p class="">{{ $AfficheEvenement->date }}</p>   
                               <div class="align-middle text-center text-sm">
-                                <a href="/update_Evenement/{{$AfficheEvenement->id }}" class="btn btn-secondary btn-sm">Update</a>
+                                <a href="/update_Evenement/{{$AfficheEvenement->id }}" class="btn btn-success btn-sm">Update</a>
                               </div>
                               <div class="align-middle text-center text-sm">
-                                  <a href="/deleteEvenement/{{$AfficheEvenement->id }}" type="button" class="btn btn-success btn-sm">delete</a>
+                                  <a href="/deleteEvenement/{{$AfficheEvenement->id }}" type="button" class="btn btn-danger btn-sm">delete</a>
                               </div>
-                              <form  action="/update/type" method="post">
-                                @csrf
-                                <input name="id" type="hidden" value="{{$AfficheEvenement->id}}">
-                                  <button name="type" type="submit" value="manuell">manuell</button>
-                                  <button name="type" type="submit" value="auto">auto      </button>
-                              </form>
                               <h4>{{$AfficheEvenement->category}}</h4>
                               <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
                                 <i class="fas text-sm ms-1" aria-hidden="true"></i>

@@ -253,7 +253,7 @@
             </div>
             <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Password :</label>
-                <input type="password" name="image" class="form-control" id="recipient-name" value="{{ $user->password }}">
+                <input type="password" name="password" class="form-control" id="recipient-name" value="{{ $user->password }}">
             </div>
             <select name="role_id" id="role_id" class="form-control mb-3">
                 @foreach($role as $role)

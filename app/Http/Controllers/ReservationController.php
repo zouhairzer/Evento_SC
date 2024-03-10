@@ -2,27 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservation;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use Illuminate\Support\Facades\DB;
+use App\Models\Reservation;
+use App\Models\Evenement;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
+
     public function ticket(Request $request)
     {
+        
+        $status = Evenement::all();
 
-        $ticket = new Reservation();
+        $check = Reservation::where('user_id', $request->user_id)->first();
+        
+        if(!$check){
 
-        $ticket->user_id = $request->user_id;
+            $reserver = new Reservation();
+            
+            $reserver->user_id = $request->user_id;
+            
+            $reserver->event_id = $request->event_id;
+            
+            // dd($reserver);
+            
+            $reserver->save();
+            
+            return redirect()->back()->with('Accpeter','Reservation à Accepter');
+        }
+        else{
+            return redirect()->back()->with('Rejecter','Déjà reserver');
+        }
 
-        $ticket->event_id = $request->event_id;
-
-        // dd($ticket);
-
-        $ticket->save();
-
-        return redirect()->back();
     }
 
 }

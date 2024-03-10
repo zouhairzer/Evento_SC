@@ -6,10 +6,10 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Firebase\JWT\JWT;
-use Firebase\JWT\key;
+use Firebase\JWT\Key;
 use App\Models\User;
 
-class Auth
+class Organisateur
 {
     /**
      * Handle an incoming request.
@@ -18,24 +18,24 @@ class Auth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!$request->cookie('token')){
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+        if(!$request->cookie('token'))
+        {
+            return redirect('/');
         }
         else{
             $token = $request->cookie('token');
-            $data = JWT::decode($token, new key($_ENV['JWT_SECRET'],'HS256'));
+            $data = JWT::decode($token, new key($_ENV['JWT_SECRET'], 'HS256'));
             $user = User::find($data->sub);
 
-            if(!$user){
-                return response()->json([
-                    'message' => 'Unauthorized'
-                ], 401);
-            }
-            else{
+            if($user->role_id === 2)
+            {
                 return $next($request);
             }
+
+            else{
+                return redidrect('/login');
+            }
         }
+        
     }
 }

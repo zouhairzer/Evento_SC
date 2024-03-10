@@ -302,6 +302,16 @@
                   </div>
                 </div>
                 @foreach($AfficheEvenements as $AfficheEvenement)
+                @if(session('error'))
+                  <div class="alert alert-danger">
+                    {{ session('error') }}
+                  </div>
+                @endif
+                @if(session('success'))
+                  <div class="alert alert-success">
+                    {{ session('success') }}
+                  </div>
+                @endif
                 <div class="row mt-4 justify-content-center">
                   <div class="col-lg-7 mb-lg-0 mb-4">
                     <div class="card">
@@ -309,6 +319,13 @@
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="d-flex flex-column h-100">
+                              @if($AfficheEvenement->status === 'rejecter')
+                                <h6 style="background-color: red; color:white; border-radius: 10px; width: 100px; text-align: center;">Rejected</h6>
+                              @elseif($AfficheEvenement->status === 'accepter')
+                                  <h6 style="background-color: green; color:white; border-radius: 10px; width: 100px; text-align: center;">Accepted</h6>
+                              @elseif($AfficheEvenement->status === 'pending')
+                                  <h6 style="background-color: blue; color:white; border-radius: 10px; width: 100px; text-align: center;">Pending</h6>
+                              @endif
                               <h4 class="font-weight-bolder">{{ $AfficheEvenement->titre }}</h4>
                               <h6 class="mb-1 pt-2 text-bold">{{ $AfficheEvenement->lieu }}</h6>
                               <p class="">{{ $AfficheEvenement->description }}</p>   

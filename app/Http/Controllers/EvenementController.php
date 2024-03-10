@@ -162,18 +162,22 @@ class EvenementController extends Controller
             'id' => 'required|exists:evenements,id',
             'status' => 'required|in:accepter,rejecter',
         ]);
-    
+
         if($request){
             $evenement = Evenement::findOrFail($request->id);
             $evenement->status = $request->status;
             // dd($evenement);
             $evenement->save();
-            return redirect()->back()->with('success','The Event is Accepted');
+            if($evenement->status === 'accepter'){
+                return redirect()->back()->with('success','The Event is Accepted');
+            }
+            else{
+                return redirect()->back()->with('error','The Event is Rejected');
+            }
         }
-        else{
-            return redirect()->back()->with('error','The Event is Rejected');
-        }
-    }
+}
+
+
     
 /////////////////////////////////////////////////  organisateur , auto && manuell acceptation ticket /////////////////////////////////////////////////
 
@@ -183,13 +187,14 @@ class EvenementController extends Controller
             'id' => 'required|exists:evenements,id',
             'type' => 'required|in:auto,manuell'
         ]);
+
         // dd($request);
+        
         $type = Evenement::findOrFail($request->id);
         $type->type = $request->type;
         $type->save();
 
         return redirect()->back();
     }
-
     
 }

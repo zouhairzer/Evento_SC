@@ -181,8 +181,10 @@ return [
     |
     */
 
-    'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
-    ])->toArray(),
+    'aliases' => [
+        // Autres alias...
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+    ],
+    
 
 ];

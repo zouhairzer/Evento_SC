@@ -301,7 +301,6 @@
                     </div>
                   </div>
                 </div>
-                @foreach($AfficheEvenements as $AfficheEvenement)
                 @if(session('error'))
                   <div class="alert alert-danger">
                     {{ session('error') }}
@@ -312,6 +311,7 @@
                     {{ session('success') }}
                   </div>
                 @endif
+                @foreach($AfficheEvenements as $AfficheEvenement)
                 <div class="row mt-4 justify-content-center">
                   <div class="col-lg-7 mb-lg-0 mb-4">
                     <div class="card">

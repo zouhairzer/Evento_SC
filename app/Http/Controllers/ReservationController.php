@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Evenement;
-use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
+
+
+//////////////////////////////////////////// Insert into Reservation ////////////////////////////////////////////
 
     public function ticket(Request $request)
     {
@@ -38,5 +41,18 @@ class ReservationController extends Controller
         }
 
     }
+
+//////////////////////////////////////////// Accepter or Rejecter une Reservation Manuell ////////////////////////////////////////////
+
+    public function reservation_manuell()
+    {
+        $getReservation = DB::table('reservations')->join('evenements','reservations.event_id','=','evenements.id')
+                                          ->join('users','reservations.user_id','=','users.id')
+                                          ->select('evenements.*','users.name as nom','reservations.id as r_id', 'reservations.status as r_status')
+                                          ->get();
+                                          
+        return view('organisateur.manuel_reservation', compact('getReservation'));
+    }
+
 
 }

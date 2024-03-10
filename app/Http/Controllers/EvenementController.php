@@ -110,10 +110,8 @@ class EvenementController extends Controller
         $evenement->nombre_places_disponibles = $request->nombre_places_disponibles;
         $evenement->category = $request->category;
         $evenement->prix = $request->prix; 
-        $evenement->type = $request->type; 
-        $evenement->user_id = $request->user_id; 
         
-        dd($evenement);
+        // dd($evenement);
 
         if($request->hasFile('image')){
             $uploadFile = 'images/';

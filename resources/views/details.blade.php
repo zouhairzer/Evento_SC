@@ -157,6 +157,7 @@
     <!-- slider Area End-->
     <!-- About Law Start -->
     <section class="about-low-area section-padding2">
+        <div class="container">
             @if(session('Accpeter'))
                 <div class="alert alert-success d-flex justify-content-center">
                     {{ session('Accpeter') }}
@@ -167,7 +168,6 @@
                     {{ session('Rejecter') }}
                 </div>
             @endif
-        <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="about-caption mb-50">
@@ -203,19 +203,28 @@
                         </div>
                     </div>
                     <div style="display: flex; align-items: center;">
-
                             <form action="/get/ticket" method="post">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $details->user_id }}">
-                                <input type="hidden" name="event_id"  value="{{ $details->id }}">
+                                <input type="hidden" name="event_id" value="{{ $details->id }}">
                                 <button type="submit" class="btn mt-50">{{ $details->prix }} DH</button>
                             </form>
-                            <a href="/" class="text-body text-sm font-weight-bold  mx-5 icon-move-right mt-5" href="javascript:;">
+                            <a href="/" class="text-body text-sm font-weight-bold mx-5 icon-move-right mt-5" href="javascript:;">
                                 Back TO
                                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                             </a>
+                            @if($details->type === 'auto')
+                            <div style="text-align: center; margin-top: 50px;">
+                                <form action="/get/pdf/{{ $details->id }}" method="get">
+                                    <button type="submit" style="background-color: green; color:white; border-radius: 10px; width: 100px; cursor:pointer;"> 
+                                        Get Ticket 
+                                        <i class="fas fa-arrow-down" style="margin-left: 5px;"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            @endif
                         </div>
-                </div>
+                    </div>
                 <div class="col-lg-6 col-md-12">
                     <!-- about-img -->
                     <div class="about-img ">

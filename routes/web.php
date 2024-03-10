@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EventoController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\EventoController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\ReservationController;
@@ -78,10 +79,9 @@ Route::post('/update/category',[CategoryController::class,'updateCategory']);
 
 //////////////////////////////////////// Evenement  ////////////////////////////////////////
 
+Route::get('/orTables',[EvenementController::class,'AfficheEvenement']);
 
 Route::post('/orTables',[EvenementController::class,'AjouterEvenement']);
-
-Route::get('/orTables',[EvenementController::class,'AfficheEvenement']);
 
 Route::get('/deleteEvenement/{id}',[EvenementController::class,'deleteEvenements']);
 
@@ -108,7 +108,11 @@ Route::get('/update_user/{id}',[AuthController::class,'getUser']);
 
 Route::post('/update/user',[AuthController::class,'updateUser']);
 
-Route::post('/get/ticket',[ReservationController::class, 'ticket']);
+Route::post('/get/ticket',[ReservationController::class, 'ticket']);////////// Creer une reservation
 
-Route::get('/details',[ReservationController::class, 'ticket']);
+// Route::get('/details',[ReservationController::class, 'ticket']); 
+
+Route::get('/manuel_reservation',[ReservationController::class, 'reservation_manuell']); ///// Afficher la page pour accepter ou rejecter une reservation  
+
+Route::get('/get/pdf/{id}',[PDFController::class, 'generatePDF']); ///// Générer PDF
 

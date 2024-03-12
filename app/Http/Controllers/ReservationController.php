@@ -22,7 +22,7 @@ class ReservationController extends Controller
 
         $check = Reservation::where('user_id', $request->user_id)->first();
         
-        if(!$check){
+        if(!$check ){
 
             $reserver = new Reservation();
             
@@ -42,16 +42,50 @@ class ReservationController extends Controller
 
     }
 
-//////////////////////////////////////////// Accepter or Rejecter une Reservation Manuell ////////////////////////////////////////////
+//////////////////////////////////////////// Afficher la page de  Rejecter une Reservation Manuell ////////////////////////////////////////////
 
     public function reservation_manuell()
     {
         $getReservation = DB::table('reservations')->join('evenements','reservations.event_id','=','evenements.id')
-                                          ->join('users','reservations.user_id','=','users.id')
-                                          ->select('evenements.*','users.name as nom','reservations.id as r_id', 'reservations.status as r_status')
-                                          ->get();
-                                          
+                                                    ->join('users','reservations.user_id','=','users.id')
+                                                    ->select('evenements.*','users.name as nom','reservations.id as r_id', 'reservations.status as r_status')
+                                                    ->get();
         return view('organisateur.manuel_reservation', compact('getReservation'));
+    }
+
+//////////////////////////////////////////// Accepter or Rejecter une Reservation Manuell ////////////////////////////////////////////
+
+
+    public function approve_manuell(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:reservations,id',
+            'status' => 'required|in:rejecter,accepter'
+        ]);
+
+        $check = Evenement::where('type','auto')->first();
+
+        $reservation = Reservation::findOrFail($request->id);
+
+        if(!$check)
+        {
+            $reservation->status = $request->status;
+        }
+
+        else
+        {    
+            $reservation->status = 'accepter';
+            $ev = Evenement::find($id);
+            $ev->nombre_places_disponibles = $ev->nombre_places_disponibles - 1;
+
+            $ev->save();
+        }
+
+        $reservation->save();
+
+        
+
+        return redirect()->back();
     }
 
 

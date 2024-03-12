@@ -57,17 +57,10 @@ class EvenementController extends Controller
 
     public function AfficheEvenement()
     {
-        // $token = $request->cookie('token');
-        // $data = JWT::decode($token, new key($_ENV['JWT_SECRET'],'HS256'));
-
-        // DB::enableQueryLog();
 
         $AfficheEvenements = DB::table('categories')->join('evenements', 'categories.id', '=', 'evenements.category')
                                                     ->select('evenements.*', 'categories.category')
                                                     ->paginate(4);
-    
-        // $queries = DB::getQueryLog();
-        // dd($queries);
 
         // dd($AfficheEvenements);   
 
@@ -152,7 +145,7 @@ class EvenementController extends Controller
         return view('admin.evenements',compact('AfficheEvenements','category'));
     }
 
-/////////////////////////////////////////////////  ADMIN , Reject && Accept /////////////////////////////////////////////////
+/////////////////////////////////////////////////  ADMIN , Reject && Accept Event /////////////////////////////////////////////////
 
     public function AcRjEvenemen(Request $request)
     {

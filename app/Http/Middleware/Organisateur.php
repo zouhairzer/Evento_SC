@@ -33,7 +33,7 @@ class Organisateur
             }
 
             else{
-                return redidrect('/login');
+                return redirect('/login');
             }
         }
         

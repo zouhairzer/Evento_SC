@@ -20,6 +20,8 @@ class PDFController extends Controller
             'titre' => $details->titre,
         ];
 
+        // dd($data);
+
         $pdf = PDF::loadview('pdf', $data);
 
         return $pdf->download('Evento.pdf');

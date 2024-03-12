@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -173,6 +174,7 @@
     <!-- About Law Start -->
     <section class="about-low-area section-padding2">
         @foreach($AfficheEvenements as $AfficheEvenement)
+        @if($AfficheEvenement->nombre_places_disponibles !== 0)
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
@@ -230,6 +232,7 @@
             </div>
         </div>
     </section>
+    @endif
     @endforeach
     {{ $AfficheEvenements->links() }}
     </main>

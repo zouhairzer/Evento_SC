@@ -29,7 +29,7 @@ class Admin
             if($user->role_id === 1){
                 return $next($request);
             }
-
+            
             else{
                 return redirect('/login');
             }

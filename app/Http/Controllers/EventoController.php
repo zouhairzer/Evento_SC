@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Role;
 use App\Models\Evenement;
 use App\Models\Category;
-use Illuminate\Pagination\Paginator;
+use App\Models\Reservation;
+use App\Models\User;
+use App\Models\Role;
 
 class EventoController extends Controller
 {
@@ -94,12 +95,24 @@ class EventoController extends Controller
 
     }
 
-/////////////////////////////////////////////////////////  Details  /////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////  Details with display button PDF  /////////////////////////////////////////////////////////
 
     public function details($id)
     {
         $details = Evenement::find($id);
-        return view('details', compact('details'));
+        $reservation = Reservation::all();
+        return view('details', compact('details','reservation'));
     }
+
+
+///////////////////////////////////////////////////////////////////  Satistique  ///////////////////////////////////////////////////////////////////
+
+    public function StatistiqueOragnisateur()
+    {
+        $TotalEvent  = Evenement::all()->count();
+        $TotalReservation = Reservation::where('status','accepter')->count();
+        return view('organisateur.orDashboard', compact('TotalEvent','TotalReservation'));
+    }
+
 
 }

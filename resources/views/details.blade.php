@@ -158,6 +158,9 @@
     <!-- About Law Start -->
     <section class="about-low-area section-padding2">
         <div class="container">
+            <a href="#" type="button" class="btn btn-outline-success" style="border-radius: 40px; padding: 10px 10px; font-size: 14px;">
+                Check
+            </a>
             @if(session('Accpeter'))
                 <div class="alert alert-success d-flex justify-content-center">
                     {{ session('Accpeter') }}
@@ -213,16 +216,19 @@
                                 Back TO
                                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                             </a>
-                            @if($details->type === 'auto')
-                            <div style="text-align: center; margin-top: 50px;">
-                                <form action="/get/pdf/{{ $details->id }}" method="get">
-                                    <button type="submit" style="background-color: green; color:white; border-radius: 10px; width: 100px; cursor:pointer;"> 
-                                        Get Ticket 
-                                        <i class="fas fa-arrow-down" style="margin-left: 5px;"></i>
-                                    </button>
-                                </form>
-                            </div>
-                            @endif
+                            @foreach($reservation as $reservations)
+                                @if($reservations->status === 'accepter')
+                                    <div style="text-align: center; margin-top: 50px;">
+                                        <form action="/get/pdf/{{ $details->id }}" method="post">
+                                            @csrf
+                                            <button type="submit" style="background-color: green; color:white; border-radius: 10px; width: 100px; cursor:pointer;"> 
+                                                Get Ticket 
+                                                <i class="fas fa-arrow-down" style="margin-left: 5px;"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 <div class="col-lg-6 col-md-12">
